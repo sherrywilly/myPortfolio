@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sherry Wilson — Python & AI Backend Developer</title>
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #0a0d14;
+      --bg2:        #0f1320;
+      --bg3:        #141929;
+      --surface:    #1a2035;
+      --border:     #1e2d47;
+      --accent1:    #00d4ff;   /* cyan-blue */
+      --accent2:    #7c6cff;   /* violet */
+      --accent3:    #00ff9d;   /* neon green */
+      --accent4:    #ff6b6b;   /* soft red */
+      --text:       #e8eaf0;
+      --muted:      #8892a4;
+      --heading:    #ffffff;
+      --tag-bg:     #1a2640;
+      --radius:     8px;
+      --transition: 0.25s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    a { color: var(--accent1); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ─── Scrollbar ──────────────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 3px; }
+
+    /* ─── Nav ────────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(10, 13, 20, 0.82);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--heading);
+    }
+    .nav-logo span { color: var(--accent1); }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.875rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--accent1); text-decoration: none; }
+
+    /* ─── Section Wrapper ────────────────────────────────────────────────── */
+    section {
+      padding: 6rem 0;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent1);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: var(--heading);
+      margin-bottom: 3rem;
+      line-height: 1.2;
+    }
+
+    /* ─── Hero ───────────────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 5rem;
+      background:
+        radial-gradient(ellipse 70% 50% at 85% 40%, rgba(0,212,255,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 15% 70%, rgba(124,108,255,0.09) 0%, transparent 55%),
+        var(--bg);
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(0,212,255,0.1);
+      border: 1px solid rgba(0,212,255,0.25);
+      color: var(--accent1);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent3);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .hero-name {
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      font-weight: 800;
+      color: var(--heading);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-name .gradient-text {
+      background: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      color: var(--muted);
+      margin-bottom: 2rem;
+      max-width: 520px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.8rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius);
+      letter-spacing: 0.02em;
+    }
+    .badge.cyan   { border-color: rgba(0,212,255,0.4); color: var(--accent1); background: rgba(0,212,255,0.07); }
+    .badge.violet { border-color: rgba(124,108,255,0.4); color: var(--accent2); background: rgba(124,108,255,0.07); }
+    .badge.green  { border-color: rgba(0,255,157,0.4); color: var(--accent3); background: rgba(0,255,157,0.07); }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: var(--radius);
+      letter-spacing: 0.02em;
+      transition: opacity var(--transition), transform var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); text-decoration: none; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: transparent;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: var(--radius);
+      letter-spacing: 0.02em;
+      border: 1px solid var(--border);
+      transition: border-color var(--transition), color var(--transition), transform var(--transition);
+      cursor: pointer;
+    }
+    .btn-ghost:hover { border-color: var(--accent1); color: var(--accent1); transform: translateY(-1px); text-decoration: none; }
+
+    .hero-status {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1.25rem;
+    }
+
+    .status-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.75rem;
+      text-align: right;
+      min-width: 220px;
+    }
+    .status-card .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 0.35rem; }
+    .status-card .value { font-size: 1rem; font-weight: 600; color: var(--heading); }
+    .status-card .value.open { color: var(--accent3); }
+
+    /* ─── Divider ─────────────────────────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+    }
+
+    /* ─── About ──────────────────────────────────────────────────────────── */
+    #about { background: var(--bg2); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text);
+      margin-bottom: 1rem;
+      font-size: 1.025rem;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color var(--transition);
+    }
+    .stat-card:hover { border-color: var(--accent1); }
+    .stat-card .num {
+      font-size: 2.25rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-card .desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── Skills ─────────────────────────────────────────────────────────── */
+    #skills { background: var(--bg); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .skill-group:hover { border-color: var(--accent2); transform: translateY(-3px); }
+
+    .skill-group-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent2);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.8rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 5px;
+    }
+    .skill-tag.hi { border-color: rgba(0,212,255,0.35); color: var(--accent1); }
+    .skill-tag.med { border-color: rgba(0,255,157,0.3); color: var(--accent3); }
+
+    /* ─── Experience ─────────────────────────────────────────────────────── */
+    #experience { background: var(--bg2); }
+
+    .timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 23px; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent1), var(--accent2), transparent);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 1.25rem;
+      position: relative;
+      padding-bottom: 2.5rem;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent1);
+      border: 2px solid var(--bg2);
+      margin-top: 8px;
+      margin-left: 19px;
+      flex-shrink: 0;
+      z-index: 1;
+      transition: background var(--transition);
+    }
+    .timeline-item:nth-child(2) .timeline-dot { background: var(--accent2); }
+    .timeline-item:nth-child(3) .timeline-dot { background: var(--accent3); }
+    .timeline-item:nth-child(4) .timeline-dot { background: var(--accent4); }
+    .timeline-item:nth-child(5) .timeline-dot { background: var(--accent1); }
+    .timeline-item:nth-child(6) .timeline-dot { background: var(--accent2); }
+
+    .timeline-content {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color var(--transition);
+    }
+    .timeline-content:hover { border-color: var(--accent1); }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .job-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--heading);
+    }
+
+    .job-period {
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .job-company {
+      font-size: 0.88rem;
+      color: var(--accent1);
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .job-bullets {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .job-bullets li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding-left: 1.1rem;
+      position: relative;
+    }
+    .job-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent1);
+    }
+
+    /* ─── Education ──────────────────────────────────────────────────────── */
+    #education { background: var(--bg); }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .edu-card:hover { border-color: var(--accent3); transform: translateY(-3px); }
+
+    .edu-degree {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--heading);
+      margin-bottom: 0.4rem;
+    }
+
+    .edu-field {
+      font-size: 0.9rem;
+      color: var(--accent3);
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    .edu-school {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .edu-period {
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: var(--tag-bg);
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    /* ─── Certifications ─────────────────────────────────────────────────── */
+    #certifications { background: var(--bg2); }
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .cert-card:hover { border-color: var(--accent4); transform: translateY(-3px); }
+
+    .cert-icon {
+      font-size: 1.75rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .cert-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--heading);
+    }
+
+    .cert-sub {
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+
+    /* ─── Contact ────────────────────────────────────────────────────────── */
+    #contact {
+      background:
+        radial-gradient(ellipse 60% 80% at 50% 50%, rgba(124,108,255,0.06) 0%, transparent 70%),
+        var(--bg);
+      text-align: center;
+    }
+
+    #contact .section-title { margin-bottom: 1rem; }
+
+    .contact-intro {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.75rem 1.5rem;
+      color: var(--text);
+      font-size: 0.9rem;
+      transition: border-color var(--transition), color var(--transition);
+    }
+    .contact-item:hover { border-color: var(--accent1); color: var(--accent1); text-decoration: none; }
+    .contact-item .icon { font-size: 1rem; }
+
+    .availability-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(0,255,157,0.07);
+      border: 1px solid rgba(0,255,157,0.25);
+      color: var(--accent3);
+      font-size: 0.88rem;
+      padding: 0.6rem 1.4rem;
+      border-radius: 2rem;
+      margin-bottom: 2.5rem;
+      font-weight: 500;
+    }
+
+    .availability-banner .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent3);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────────────────── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    footer span { color: var(--accent1); }
+
+    /* ─── Responsive ─────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-status { align-items: flex-start; }
+      .status-card { text-align: left; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .timeline::before { display: none; }
+      .timeline-item { grid-template-columns: 1fr; }
+      .timeline-dot { display: none; }
+      section { padding: 4rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Navigation ───────────────────────────────────────────────────── -->
+  <nav>
+    <div class="nav-logo">SW<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── Hero ─────────────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-tag">✅ Right to Work in UK — No Sponsorship Required</div>
+          <h1 class="hero-name">
+            Sherry<br/>
+            <span class="gradient-text">Wilson</span>
+          </h1>
+          <p class="hero-subtitle">
+            Python &amp; AI Backend Developer — building intelligent APIs with
+            FastAPI, LangChain, RAG, and LLMs. MSc Artificial Intelligence, University of Essex.
+          </p>
+          <div class="hero-badges">
+            <span class="badge cyan">FastAPI</span>
+            <span class="badge cyan">LangChain</span>
+            <span class="badge cyan">LLMs</span>
+            <span class="badge violet">RAG Architecture</span>
+            <span class="badge violet">Microservices</span>
+            <span class="badge green">AWS</span>
+            <span class="badge green">Docker</span>
+          </div>
+          <div class="hero-cta">
+            <a class="btn-primary" href="#contact">Get In Touch</a>
+            <a class="btn-ghost" href="#experience">View Experience</a>
+          </div>
+        </div>
+
+        <div class="hero-status">
+          <div class="status-card">
+            <div class="label">Status</div>
+            <div class="value open">Open to Work</div>
+          </div>
+          <div class="status-card">
+            <div class="label">Location</div>
+            <div class="value">Colchester, UK</div>
+          </div>
+          <div class="status-card">
+            <div class="label">Experience</div>
+            <div class="value">3+ Years</div>
+          </div>
+          <div class="status-card">
+            <div class="label">Visa</div>
+            <div class="value">Graduate Route (2027)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── About ────────────────────────────────────────────────────────── -->
+  <section id="about">
+    <div class="container">
+      <div class="section-label">About</div>
+      <h2 class="section-title">Turning AI Research Into Real Products</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Senior Python developer with 3+ years building production backends and an
+            MSc in Artificial Intelligence from the University of Essex. I specialise in
+            AI-powered APIs — combining FastAPI with LangChain, RAG architecture, and
+            LLM fine-tuning to build real products that solve real problems.
+          </p>
+          <p>
+            Previously at Deepsense Digital Solutions I led a team of three developers
+            delivering backend systems for major clients including ITC, Nippon Paints,
+            and Greencell Mobility. I integrated LangChain LLM features into production
+            applications and built scalable microservices on AWS.
+          </p>
+          <p>
+            Currently building AI-powered projects including a
+            <strong style="color:var(--accent1);">Document Assistant API</strong>
+            using FastAPI + LangChain + ChromaDB + Gemini.
+            Open to Python, FastAPI, AI/ML Backend, and LLM Engineer roles across the UK.
+          </p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="num">3+</div>
+            <div class="desc">Years Production Backend</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">MSc</div>
+            <div class="desc">Artificial Intelligence</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">15%</div>
+            <div class="desc">Revenue Uplift Delivered</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">30%</div>
+            <div class="desc">Throughput Improvement</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── Skills ───────────────────────────────────────────────────────── -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-label">Technical Skills</div>
+      <h2 class="section-title">The Stack Behind the Work</h2>
+      <div class="skills-grid">
+
+        <div class="skill-group">
+          <div class="skill-group-title">AI / ML</div>
+          <div class="skill-tags">
+            <span class="skill-tag hi">LangChain</span>
+            <span class="skill-tag hi">LLM Fine-tuning</span>
+            <span class="skill-tag hi">RAG</span>
+            <span class="skill-tag hi">ChromaDB</span>
+            <span class="skill-tag hi">Gemini</span>
+            <span class="skill-tag">OpenAI</span>
+            <span class="skill-tag">Pandas</span>
+            <span class="skill-tag">Matplotlib</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">Backend Frameworks</div>
+          <div class="skill-tags">
+            <span class="skill-tag hi">FastAPI</span>
+            <span class="skill-tag hi">Django</span>
+            <span class="skill-tag hi">Django REST Framework</span>
+            <span class="skill-tag">Flask</span>
+            <span class="skill-tag">GraphQL</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">Infrastructure & Cloud</div>
+          <div class="skill-tags">
+            <span class="skill-tag med">AWS EC2</span>
+            <span class="skill-tag med">Docker</span>
+            <span class="skill-tag med">Microservices</span>
+            <span class="skill-tag">Kafka</span>
+            <span class="skill-tag">HLS / FFmpeg</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">Async & Queues</div>
+          <div class="skill-tags">
+            <span class="skill-tag hi">Celery</span>
+            <span class="skill-tag hi">Redis</span>
+            <span class="skill-tag">Real-time Processing</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">Databases</div>
+          <div class="skill-tags">
+            <span class="skill-tag hi">PostgreSQL</span>
+            <span class="skill-tag">SQL Optimisation</span>
+            <span class="skill-tag">ChromaDB</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">Core Skills</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Web Applications</span>
+            <span class="skill-tag">Automated Processes</span>
+            <span class="skill-tag">RESTful APIs</span>
+            <span class="skill-tag">Team Leadership</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── Experience ───────────────────────────────────────────────────── -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-label">Experience</div>
+      <h2 class="section-title">Career Journey</h2>
+
+      <div class="timeline">
+
+        <!-- Deepsense Digital Solutions -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="job-header">
+              <div class="job-title">Senior Python Backend Developer</div>
+              <span class="job-period">Aug 2021 — Jul 2024 · 3 yrs</span>
+            </div>
+            <div class="job-company">Deepsense Digital Solutions — Chennai, India</div>
+            <ul class="job-bullets">
+              <li>Led a team of 3 backend developers delivering production systems for ITC (Classmate), Fabelle, Greencell Mobility (Neugo), and Nippon Paints.</li>
+              <li>Designed and built scalable backend architectures using FastAPI and Django REST Framework, serving thousands of users.</li>
+              <li>Integrated LangChain to build and deploy LLM-powered features in production applications across multiple client projects.</li>
+              <li>Integrated Kafka-based microservices, reducing system latency by 25%.</li>
+              <li>Implemented asynchronous task processing with Celery and Redis, boosting throughput by 30%.</li>
+              <li>Led cloud deployment on AWS using Docker, ensuring high availability and security compliance.</li>
+              <li>Implemented HLS video streaming via FFmpeg for eLearning platforms.</li>
+              <li>Contributed to a 15% revenue uplift through backend architecture and API development for high-profile clients.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Victoria Solutions -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="job-header">
+              <div class="job-title">AI Intern</div>
+              <span class="job-period">Jul 2025 — Aug 2025 · 2 mos</span>
+            </div>
+            <div class="job-company">Victoria Solutions — London Area, UK</div>
+            <ul class="job-bullets">
+              <li>End-to-end data analysis and cleaning with Pandas for AI model training datasets.</li>
+              <li>Built data visualisation dashboards with Matplotlib to communicate insights to stakeholders.</li>
+              <li>Preprocessed large datasets for ML pipelines, improving data quality and model performance.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- AquSag Technologies -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="job-header">
+              <div class="job-title">Python LLM Developer</div>
+              <span class="job-period">Sep 2025 — Oct 2025 · 2 mos</span>
+            </div>
+            <div class="job-company">AquSag Technologies — India</div>
+            <ul class="job-bullets">
+              <li>Analysed and triaged GitHub issues across trending open-source libraries to identify high-impact challenges.</li>
+              <li>Evaluated unit test coverage and code quality for LLM performance assessment in real-world bug-fixing scenarios.</li>
+              <li>Collaborated with researchers to design repositories and issues that effectively test LLM capabilities.</li>
+              <li>Led and mentored junior engineers on technical projects.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Self-employed -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="job-header">
+              <div class="job-title">Python Developer</div>
+              <span class="job-period">Jun 2020 — Jul 2021 · 1 yr 2 mos</span>
+            </div>
+            <div class="job-company">Self-employed — Kerala, India</div>
+            <ul class="job-bullets">
+              <li>Delivered custom Django, Flask, and FastAPI backend solutions for diverse client projects.</li>
+              <li>Integrated ML models into production environments with secure REST APIs.</li>
+              <li>Containerized and deployed scalable services using Docker across multi-environment setups.</li>
+              <li>Developed asynchronous background job queues with Celery and Redis.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Welshwood Manor -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="job-header">
+              <div class="job-title">Team Leader</div>
+              <span class="job-period">Jan 2026 — Present</span>
+            </div>
+            <div class="job-company">Welshwood Manor — Colchester, UK</div>
+            <ul class="job-bullets">
+              <li>Supporting residents while actively developing AI projects during career transition into the UK tech industry.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Care Circle -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="job-header">
+              <div class="job-title">Senior Healthcare Assistant → Care Assistant</div>
+              <span class="job-period">Jul 2024 — Jan 2026 · 1 yr 7 mos</span>
+            </div>
+            <div class="job-company">Care Circle — Colchester, UK</div>
+            <ul class="job-bullets">
+              <li>Provided consistent, high-quality care while building professional skills in the UK environment.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── Education ─────────────────────────────────────────────────────── -->
+  <section id="education">
+    <div class="container">
+      <div class="section-label">Education</div>
+      <h2 class="section-title">Academic Foundation</h2>
+      <div class="edu-grid">
+
+        <div class="edu-card">
+          <div class="edu-degree">Master of Science</div>
+          <div class="edu-field">Artificial Intelligence &amp; Its Applications</div>
+          <div class="edu-school">University of Essex</div>
+          <span class="edu-period">Jan 2024 — Jan 2025</span>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-degree">Bachelor of Computer Applications</div>
+          <div class="edu-field">Computer Programming &amp; Specific Applications</div>
+          <div class="edu-school">University of Kerala</div>
+          <span class="edu-period">2018 — 2021</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── Certifications ───────────────────────────────────────────────── -->
+  <section id="certifications">
+    <div class="container">
+      <div class="section-label">Certifications</div>
+      <h2 class="section-title">Credentials &amp; Licences</h2>
+      <div class="cert-grid">
+
+        <div class="cert-card">
+          <div class="cert-icon">⚡</div>
+          <div class="cert-name">FastAPI — The Complete Course 2025</div>
+          <div class="cert-sub">Beginner + Advanced</div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">🐍</div>
+          <div class="cert-name">Advanced Django</div>
+          <div class="cert-sub">Advanced techniques in Django framework</div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">🚗</div>
+          <div class="cert-name">UK Driving Licence</div>
+          <div class="cert-sub">Full UK driving licence</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── Contact ──────────────────────────────────────────────────────── -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">Let's Build Something Intelligent</h2>
+
+      <div class="availability-banner">
+        <span class="dot"></span>
+        Available for Python, FastAPI, AI/ML Backend &amp; LLM Engineer roles across the UK
+      </div>
+
+      <p class="contact-intro">
+        Open to full-time opportunities in the UK. No sponsorship required —
+        Graduate Route Visa valid until 2027.
+      </p>
+
+      <div class="contact-links">
+        <a class="contact-item" href="mailto:sherrywilly521@gmail.com">
+          <span class="icon">✉️</span> sherrywilly521@gmail.com
+        </a>
+        <a class="contact-item" href="tel:+447778214285">
+          <span class="icon">📱</span> +44 7778 214285
+        </a>
+        <a class="contact-item" href="https://www.linkedin.com/in/sherry-wilson-python-dev" target="_blank" rel="noopener">
+          <span class="icon">🔗</span> LinkedIn Profile
+        </a>
+        <a class="contact-item" href="#">
+          <span class="icon">📍</span> Colchester, England, UK
+        </a>
+      </div>
+
+      <a class="btn-primary" href="mailto:sherrywilly521@gmail.com">Start a Conversation →</a>
+    </div>
+  </section>
+
+  <!-- ─── Footer ───────────────────────────────────────────────────────── -->
+  <footer>
+    <p>© 2025 <span>Sherry Wilson</span> · Python &amp; AI Backend Developer · Colchester, UK</p>
+  </footer>
+
+</body>
+</html>
