@@ -622,7 +622,255 @@
       .timeline-item { grid-template-columns: 1fr; }
       .timeline-dot { display: none; }
       section { padding: 4rem 0; }
+      .avatar-wrapper { width: 160px; height: 160px; }
     }
+
+    /* ─── Canvas Particles ────────────────────────────────────────────────── */
+    #particles-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    #hero { overflow: hidden; }
+    #hero .container { position: relative; z-index: 1; }
+
+    /* ─── Avatar ──────────────────────────────────────────────────────────── */
+    .avatar-wrapper {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .avatar-ring {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: conic-gradient(var(--accent1), var(--accent2), var(--accent3), var(--accent1));
+      animation: spin 4s linear infinite;
+      z-index: 0;
+    }
+
+    .avatar-ring-mask {
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      background: var(--bg);
+      z-index: 1;
+    }
+
+    .avatar-core {
+      position: absolute;
+      inset: 14px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--surface) 0%, var(--bg3) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0,212,255,0.18);
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    .avatar-core::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 30%, rgba(0,212,255,0.12), transparent 60%);
+      border-radius: 50%;
+    }
+
+    .avatar-initials {
+      font-size: 2.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+      user-select: none;
+    }
+
+    .avatar-online {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      width: 20px;
+      height: 20px;
+      background: var(--accent3);
+      border-radius: 50%;
+      border: 3px solid var(--bg);
+      z-index: 3;
+      animation: pulse 2s infinite;
+    }
+
+    /* ─── Orbiting Tech Icons ─────────────────────────────────────────────── */
+    .float-icons {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 0; height: 0;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .float-icon {
+      position: absolute;
+      width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      margin: -17px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+      transition: border-color 0.3s;
+    }
+
+    .float-icon:hover { border-color: var(--accent1); }
+
+    @keyframes orbit {
+      from { transform: rotate(0deg)   translateX(115px) rotate(0deg); }
+      to   { transform: rotate(360deg) translateX(115px) rotate(-360deg); }
+    }
+
+    .fi-1 { animation: orbit 11s linear infinite 0s; }
+    .fi-2 { animation: orbit 11s linear infinite -1.83s; }
+    .fi-3 { animation: orbit 11s linear infinite -3.67s; }
+    .fi-4 { animation: orbit 11s linear infinite -5.5s; }
+    .fi-5 { animation: orbit 11s linear infinite -7.33s; }
+    .fi-6 { animation: orbit 11s linear infinite -9.17s; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── Scroll Reveal ───────────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal.d1 { transition-delay: 0.08s; }
+    .reveal.d2 { transition-delay: 0.16s; }
+    .reveal.d3 { transition-delay: 0.24s; }
+    .reveal.d4 { transition-delay: 0.32s; }
+    .reveal.d5 { transition-delay: 0.40s; }
+
+    /* ─── Typewriter ─────────────────────────────────────────────────────── */
+    .tw-wrap {
+      font-size: 1rem;
+      color: var(--accent1);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      min-height: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    #typewriter {
+      border-right: 2px solid var(--accent1);
+      animation: blink 0.75s step-end infinite;
+      white-space: nowrap;
+    }
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50%       { border-color: var(--accent1); }
+    }
+
+    /* ─── Enhanced Glow Hovers ───────────────────────────────────────────── */
+    .skill-group:hover  { box-shadow: 0 4px 28px rgba(124,108,255,0.18); }
+    .stat-card:hover    { box-shadow: 0 4px 24px rgba(0,212,255,0.14); }
+    .timeline-content:hover { box-shadow: 0 4px 22px rgba(0,212,255,0.12); }
+    .cert-card:hover    { box-shadow: 0 4px 22px rgba(255,107,107,0.14); }
+    .edu-card:hover     { box-shadow: 0 4px 22px rgba(0,255,157,0.14); }
+    .project-card:hover { box-shadow: 0 4px 28px rgba(0,212,255,0.16); }
+
+    /* ─── Projects Section ───────────────────────────────────────────────── */
+    #projects { background: var(--bg2); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: border-color var(--transition), transform var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card:hover { border-color: var(--accent1); transform: translateY(-4px); }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .project-card:hover::before { opacity: 1; }
+
+    .project-icon {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .project-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--heading);
+    }
+
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.25rem;
+    }
+
+    .project-tag {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: var(--tag-bg);
+    }
+    .project-tag.c { border-color: rgba(0,212,255,0.35); color: var(--accent1); }
+    .project-tag.v { border-color: rgba(124,108,255,0.35); color: var(--accent2); }
+    .project-tag.g { border-color: rgba(0,255,157,0.30); color: var(--accent3); }
+
+    .project-highlight {
+      font-size: 0.8rem;
+      color: var(--accent3);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .project-highlight::before { content: '▸'; color: var(--accent1); }
   </style>
 </head>
 <body>
@@ -633,6 +881,7 @@
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -641,6 +890,7 @@
 
   <!-- ─── Hero ─────────────────────────────────────────────────────────── -->
   <section id="hero">
+    <canvas id="particles-canvas"></canvas>
     <div class="container">
       <div class="hero-inner">
         <div>
@@ -649,6 +899,7 @@
             Sherry<br/>
             <span class="gradient-text">Wilson</span>
           </h1>
+          <div class="tw-wrap"><span id="typewriter"></span></div>
           <p class="hero-subtitle">
             Senior Python &amp; Django Backend Developer — building scalable production APIs
             with Django, DRF, Celery, and PostgreSQL on AWS. MSc Artificial Intelligence,
@@ -671,6 +922,23 @@
         </div>
 
         <div class="hero-status">
+          <!-- Animated Avatar -->
+          <div class="avatar-wrapper">
+            <div class="avatar-ring"><div class="avatar-ring-mask"></div></div>
+            <div class="avatar-core">
+              <span class="avatar-initials">SW</span>
+            </div>
+            <div class="float-icons">
+              <span class="float-icon fi-1" title="Python">🐍</span>
+              <span class="float-icon fi-2" title="FastAPI/Celery">⚡</span>
+              <span class="float-icon fi-3" title="Docker">🐳</span>
+              <span class="float-icon fi-4" title="AWS Cloud">☁️</span>
+              <span class="float-icon fi-5" title="AI/ML">🤖</span>
+              <span class="float-icon fi-6" title="GraphQL/API">🔗</span>
+            </div>
+            <div class="avatar-online" title="Open to Work"></div>
+          </div>
+          <!-- Status Cards -->
           <div class="status-card">
             <div class="label">Status</div>
             <div class="value open">Open to Work</div>
@@ -700,7 +968,7 @@
       <div class="section-label">About</div>
       <h2 class="section-title">Production Django Backends, Built to Scale</h2>
       <div class="about-grid">
-        <div class="about-text">
+        <div class="about-text reveal">
           <p>
             Senior Python developer with 3+ years building production backends and an
             MSc in Artificial Intelligence from the University of Essex. My core expertise
@@ -722,9 +990,9 @@
             Open to Django Backend, Python Backend, and DRF roles across the UK.
           </p>
         </div>
-        <div class="about-stats">
+        <div class="about-stats reveal d1">
           <div class="stat-card">
-            <div class="num">3+</div>
+            <div class="num" data-count="3" data-suffix="+">3+</div>
             <div class="desc">Years Production Backend</div>
           </div>
           <div class="stat-card">
@@ -732,11 +1000,11 @@
             <div class="desc">Artificial Intelligence</div>
           </div>
           <div class="stat-card">
-            <div class="num">15%</div>
+            <div class="num" data-count="15" data-suffix="%">15%</div>
             <div class="desc">Revenue Uplift Delivered</div>
           </div>
           <div class="stat-card">
-            <div class="num">30%</div>
+            <div class="num" data-count="30" data-suffix="%">30%</div>
             <div class="desc">Throughput Improvement</div>
           </div>
         </div>
@@ -753,7 +1021,7 @@
       <h2 class="section-title">The Stack Behind the Work</h2>
       <div class="skills-grid">
 
-        <div class="skill-group">
+        <div class="skill-group reveal d1">
           <div class="skill-group-title">Django Ecosystem (Primary)</div>
           <div class="skill-tags">
             <span class="skill-tag hi">Django</span>
@@ -766,7 +1034,7 @@
           </div>
         </div>
 
-        <div class="skill-group">
+        <div class="skill-group reveal d2">
           <div class="skill-group-title">Infrastructure & Deployment</div>
           <div class="skill-tags">
             <span class="skill-tag hi">AWS EC2</span>
@@ -779,7 +1047,7 @@
           </div>
         </div>
 
-        <div class="skill-group">
+        <div class="skill-group reveal d3">
           <div class="skill-group-title">Databases</div>
           <div class="skill-tags">
             <span class="skill-tag hi">PostgreSQL</span>
@@ -788,7 +1056,7 @@
           </div>
         </div>
 
-        <div class="skill-group">
+        <div class="skill-group reveal d1">
           <div class="skill-group-title">Additional Frameworks</div>
           <div class="skill-tags">
             <span class="skill-tag hi">FastAPI</span>
@@ -796,7 +1064,7 @@
           </div>
         </div>
 
-        <div class="skill-group">
+        <div class="skill-group reveal d2">
           <div class="skill-group-title">AI / ML (Project Experience)</div>
           <div class="skill-tags">
             <span class="skill-tag med">LangChain</span>
@@ -809,7 +1077,7 @@
           </div>
         </div>
 
-        <div class="skill-group">
+        <div class="skill-group reveal d3">
           <div class="skill-group-title">Core Skills</div>
           <div class="skill-tags">
             <span class="skill-tag">REST API Design</span>
@@ -817,6 +1085,94 @@
             <span class="skill-tag">Web Applications</span>
             <span class="skill-tag">Automated Processes</span>
             <span class="skill-tag">Team Leadership</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── Projects ─────────────────────────────────────────────────────── -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-label">Projects</div>
+      <h2 class="section-title">Built &amp; Shipped</h2>
+      <div class="projects-grid">
+
+        <div class="project-card reveal d1">
+          <div class="project-icon">🤖</div>
+          <div class="project-name">Document Assistant API</div>
+          <div class="project-desc">
+            RAG-powered document Q&amp;A system that ingests PDFs and answers questions
+            with accurate citations. Uses chunking, vector embeddings, and streaming
+            responses via Gemini.
+          </div>
+          <div class="project-highlight">FastAPI + LangChain + ChromaDB + Gemini</div>
+          <div class="project-tags">
+            <span class="project-tag c">FastAPI</span>
+            <span class="project-tag c">LangChain</span>
+            <span class="project-tag v">ChromaDB</span>
+            <span class="project-tag v">RAG</span>
+            <span class="project-tag g">Gemini LLM</span>
+            <span class="project-tag">Python</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal d2">
+          <div class="project-icon">🎥</div>
+          <div class="project-name">HLS Video Streaming Platform</div>
+          <div class="project-desc">
+            eLearning platform backend with adaptive HLS video streaming. Videos are
+            transcoded via FFmpeg into multiple quality tiers and served through
+            CDN-backed AWS S3 with DRM-ready token authentication.
+          </div>
+          <div class="project-highlight">30% faster media delivery at scale</div>
+          <div class="project-tags">
+            <span class="project-tag c">Django</span>
+            <span class="project-tag c">Celery</span>
+            <span class="project-tag v">FFmpeg</span>
+            <span class="project-tag v">HLS</span>
+            <span class="project-tag g">AWS S3</span>
+            <span class="project-tag">Nginx</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal d3">
+          <div class="project-icon">🛒</div>
+          <div class="project-name">Multi-Tenant E-Commerce Backend</div>
+          <div class="project-desc">
+            High-availability REST + GraphQL backend for a multi-client retail
+            platform. Features async order processing, real-time inventory
+            updates via Redis pub/sub, and Kafka-driven microservices.
+          </div>
+          <div class="project-highlight">Serving thousands of concurrent users</div>
+          <div class="project-tags">
+            <span class="project-tag c">Django DRF</span>
+            <span class="project-tag c">GraphQL</span>
+            <span class="project-tag v">Celery + Redis</span>
+            <span class="project-tag v">Kafka</span>
+            <span class="project-tag g">PostgreSQL</span>
+            <span class="project-tag g">Docker</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal d1">
+          <div class="project-icon">📊</div>
+          <div class="project-name">ML Data Pipeline &amp; Dashboard</div>
+          <div class="project-desc">
+            End-to-end data pipeline for AI model training — automated ingestion,
+            cleaning, feature engineering with Pandas, and interactive visualisation
+            dashboards built with Matplotlib for stakeholder reporting.
+          </div>
+          <div class="project-highlight">Improved model data quality significantly</div>
+          <div class="project-tags">
+            <span class="project-tag c">Python</span>
+            <span class="project-tag c">Pandas</span>
+            <span class="project-tag v">Matplotlib</span>
+            <span class="project-tag g">ML Pipelines</span>
+            <span class="project-tag">FastAPI</span>
           </div>
         </div>
 
@@ -837,7 +1193,7 @@
         <!-- Deepsense Digital Solutions -->
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="timeline-content">
+          <div class="timeline-content reveal">
             <div class="job-header">
               <div class="job-title">Senior Python Backend Developer</div>
               <span class="job-period">Aug 2021 — Jul 2024 · 3 yrs</span>
@@ -861,7 +1217,7 @@
         <!-- Victoria Solutions -->
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="timeline-content">
+          <div class="timeline-content reveal d1">
             <div class="job-header">
               <div class="job-title">AI Intern</div>
               <span class="job-period">Jul 2025 — Aug 2025 · 2 mos</span>
@@ -878,7 +1234,7 @@
         <!-- AquSag Technologies -->
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="timeline-content">
+          <div class="timeline-content reveal d2">
             <div class="job-header">
               <div class="job-title">Python LLM Developer</div>
               <span class="job-period">Sep 2025 — Oct 2025 · 2 mos</span>
@@ -896,7 +1252,7 @@
         <!-- Self-employed -->
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="timeline-content">
+          <div class="timeline-content reveal d1">
             <div class="job-header">
               <div class="job-title">Python Developer</div>
               <span class="job-period">Jun 2020 — Jul 2021 · 1 yr 2 mos</span>
@@ -915,7 +1271,7 @@
         <!-- Welshwood Manor -->
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="timeline-content">
+          <div class="timeline-content reveal d2">
             <div class="job-header">
               <div class="job-title">Team Leader</div>
               <span class="job-period">Jan 2026 — Present</span>
@@ -930,7 +1286,7 @@
         <!-- Care Circle -->
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="timeline-content">
+          <div class="timeline-content reveal d3">
             <div class="job-header">
               <div class="job-title">Senior Healthcare Assistant → Care Assistant</div>
               <span class="job-period">Jul 2024 — Jan 2026 · 1 yr 7 mos</span>
@@ -955,14 +1311,14 @@
       <h2 class="section-title">Academic Foundation</h2>
       <div class="edu-grid">
 
-        <div class="edu-card">
+        <div class="edu-card reveal d1">
           <div class="edu-degree">Master of Science</div>
           <div class="edu-field">Artificial Intelligence &amp; Its Applications</div>
           <div class="edu-school">University of Essex</div>
           <span class="edu-period">Jan 2024 — Jan 2025</span>
         </div>
 
-        <div class="edu-card">
+        <div class="edu-card reveal d2">
           <div class="edu-degree">Bachelor of Computer Applications</div>
           <div class="edu-field">Computer Programming &amp; Specific Applications</div>
           <div class="edu-school">University of Kerala</div>
@@ -982,19 +1338,19 @@
       <h2 class="section-title">Credentials &amp; Licences</h2>
       <div class="cert-grid">
 
-        <div class="cert-card">
+        <div class="cert-card reveal d1">
           <div class="cert-icon">⚡</div>
           <div class="cert-name">FastAPI — The Complete Course 2025</div>
           <div class="cert-sub">Beginner + Advanced</div>
         </div>
 
-        <div class="cert-card">
+        <div class="cert-card reveal d2">
           <div class="cert-icon">🐍</div>
           <div class="cert-name">Advanced Django</div>
           <div class="cert-sub">Advanced techniques in Django framework</div>
         </div>
 
-        <div class="cert-card">
+        <div class="cert-card reveal d3">
           <div class="cert-icon">🚗</div>
           <div class="cert-name">UK Driving Licence</div>
           <div class="cert-sub">Full UK driving licence</div>
@@ -1046,5 +1402,141 @@
     <p>© 2025 <span>Sherry Wilson</span> · Senior Python &amp; Django Backend Developer · Colchester, UK</p>
   </footer>
 
+  <script>
+    /* ── Particle Network ────────────────────────────────────────────────── */
+    (function () {
+      var canvas = document.getElementById('particles-canvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var W, H, pts = [];
+
+      function resize() {
+        W = canvas.width  = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+      }
+
+      function Pt() {
+        this.x  = Math.random() * W;
+        this.y  = Math.random() * H;
+        this.r  = Math.random() * 1.4 + 0.4;
+        this.vx = (Math.random() - 0.5) * 0.45;
+        this.vy = (Math.random() - 0.5) * 0.45;
+        this.a  = Math.random() * 0.45 + 0.1;
+        this.col = Math.random() > 0.5 ? '0,212,255' : '124,108,255';
+      }
+      Pt.prototype.step = function () {
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0) this.x = W; if (this.x > W) this.x = 0;
+        if (this.y < 0) this.y = H; if (this.y > H) this.y = 0;
+      };
+
+      function init() {
+        pts = [];
+        for (var i = 0; i < 90; i++) pts.push(new Pt());
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        /* connections */
+        for (var i = 0; i < pts.length; i++) {
+          for (var j = i + 1; j < pts.length; j++) {
+            var dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+            var d  = Math.sqrt(dx * dx + dy * dy);
+            if (d < 130) {
+              ctx.beginPath();
+              ctx.strokeStyle = 'rgba(0,212,255,' + (0.09 * (1 - d / 130)) + ')';
+              ctx.lineWidth = 0.5;
+              ctx.moveTo(pts[i].x, pts[i].y);
+              ctx.lineTo(pts[j].x, pts[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+        /* dots */
+        pts.forEach(function (p) {
+          p.step();
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(' + p.col + ',' + p.a + ')';
+          ctx.fill();
+        });
+        requestAnimationFrame(draw);
+      }
+
+      resize(); init(); draw();
+      window.addEventListener('resize', function () { resize(); init(); });
+    })();
+
+    /* ── Scroll Reveal ───────────────────────────────────────────────────── */
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!window.IntersectionObserver) {
+        els.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      els.forEach(function (el) { obs.observe(el); });
+    })();
+
+    /* ── Animated Counters ───────────────────────────────────────────────── */
+    (function () {
+      var counters = document.querySelectorAll('[data-count]');
+      if (!window.IntersectionObserver) return;
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var el     = e.target;
+          var target = parseFloat(el.getAttribute('data-count'));
+          var suffix = el.getAttribute('data-suffix') || '';
+          var dur    = 1600;
+          var start  = performance.now();
+          function tick(now) {
+            var t   = Math.min((now - start) / dur, 1);
+            var val = Math.round(t * t * (3 - 2 * t) * target); /* smoothstep */
+            el.textContent = val + suffix;
+            if (t < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+          obs.unobserve(el);
+        });
+      }, { threshold: 0.6 });
+      counters.forEach(function (c) { obs.observe(c); });
+    })();
+
+    /* ── Typewriter ──────────────────────────────────────────────────────── */
+    (function () {
+      var el = document.getElementById('typewriter');
+      if (!el) return;
+      var lines = [
+        'Django · DRF · Celery · Redis',
+        'AWS · Docker · Nginx · PostgreSQL',
+        'FastAPI · LangChain · GraphQL',
+        'MSc AI · University of Essex'
+      ];
+      var li = 0, ci = 0, del = false;
+      function tick() {
+        var cur = lines[li];
+        if (!del) {
+          ci++;
+          el.textContent = cur.slice(0, ci);
+          if (ci === cur.length) { del = true; setTimeout(tick, 2200); return; }
+          setTimeout(tick, 60);
+        } else {
+          ci--;
+          el.textContent = cur.slice(0, ci);
+          if (ci === 0) { del = false; li = (li + 1) % lines.length; }
+          setTimeout(tick, 35);
+        }
+      }
+      tick();
+    })();
+  </script>
 </body>
 </html>
