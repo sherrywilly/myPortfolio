@@ -230,6 +230,40 @@
     }
     .btn-ghost:hover { border-color: var(--accent1); color: var(--accent1); transform: translateY(-1px); text-decoration: none; }
 
+    .btn-cv {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: transparent;
+      color: var(--accent3);
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: var(--radius);
+      letter-spacing: 0.02em;
+      border: 1px solid rgba(0,255,157,0.4);
+      background: rgba(0,255,157,0.06);
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+      cursor: pointer;
+    }
+    .btn-cv:hover { background: rgba(0,255,157,0.14); border-color: var(--accent3); transform: translateY(-1px); text-decoration: none; }
+
+    .nav-cv-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(0,255,157,0.08);
+      border: 1px solid rgba(0,255,157,0.35);
+      color: var(--accent3) !important;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.85rem;
+      border-radius: var(--radius);
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .nav-cv-btn:hover { background: rgba(0,255,157,0.18); border-color: var(--accent3); text-decoration: none !important; }
+
     .hero-status {
       display: flex;
       flex-direction: column;
@@ -885,6 +919,7 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a class="nav-cv-btn" href="Sherry_Wilson_CV.pdf" download="Sherry_Wilson_CV.pdf">⬇ Download CV</a></li>
     </ul>
   </nav>
 
@@ -918,6 +953,7 @@
           <div class="hero-cta">
             <a class="btn-primary" href="#contact">Get In Touch</a>
             <a class="btn-ghost" href="#experience">View Experience</a>
+            <a class="btn-cv" href="Sherry_Wilson_CV.pdf" download="Sherry_Wilson_CV.pdf">⬇ Download CV</a>
           </div>
         </div>
 
