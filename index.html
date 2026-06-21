@@ -264,6 +264,44 @@
     }
     .nav-cv-btn:hover { background: rgba(0,255,157,0.18); border-color: var(--accent3); text-decoration: none !important; }
 
+    .hero-proof {
+      max-width: 620px;
+      margin: -0.75rem 0 1.5rem;
+      color: var(--text);
+      font-size: 0.96rem;
+    }
+
+    .hero-proof strong { color: var(--accent3); }
+
+    .worked-with {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .worked-with-label {
+      color: var(--accent1);
+      font-weight: 700;
+    }
+
+    .worked-with span {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.02);
+      color: var(--text);
+      letter-spacing: 0.03em;
+      text-transform: none;
+    }
+
     .hero-status {
       display: flex;
       flex-direction: column;
@@ -334,6 +372,40 @@
       color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.06em;
+    }
+
+    /* ─── Core Competencies ──────────────────────────────────────────────── */
+    #competencies { background: var(--bg); }
+
+    .competencies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .competency-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .competency-card:hover { border-color: var(--accent1); transform: translateY(-3px); }
+
+    .competency-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent1);
+      margin-bottom: 0.85rem;
+      font-weight: 700;
+    }
+
+    .competency-copy {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.6;
     }
 
     /* ─── Skills ─────────────────────────────────────────────────────────── */
@@ -905,6 +977,90 @@
       gap: 0.4rem;
     }
     .project-highlight::before { content: '▸'; color: var(--accent1); }
+
+    .section-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: -1.5rem 0 2rem;
+    }
+
+    .section-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 0.95rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      color: var(--text);
+      font-size: 0.84rem;
+      transition: border-color var(--transition), transform var(--transition), color var(--transition);
+    }
+
+    .section-link:hover {
+      border-color: var(--accent1);
+      color: var(--accent1);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    .project-split {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .project-line {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .project-line strong { color: var(--text); }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 0.35rem;
+    }
+
+    .project-link {
+      font-size: 0.78rem;
+      color: var(--accent1);
+      border-bottom: 1px solid transparent;
+    }
+
+    .project-link:hover {
+      border-color: currentColor;
+      text-decoration: none;
+    }
+
+    .secondary-role {
+      opacity: 0.82;
+      border-style: dashed;
+    }
+
+    .secondary-role:hover {
+      opacity: 1;
+      border-color: var(--accent2);
+    }
+
+    .experience-note {
+      margin-top: 0.5rem;
+      margin-bottom: 2rem;
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .contact-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
   </style>
 </head>
 <body>
@@ -936,9 +1092,14 @@
           </h1>
           <div class="tw-wrap"><span id="typewriter"></span></div>
           <p class="hero-subtitle">
-            Senior Python &amp; Django Backend Developer — building scalable production APIs
-            with Django, DRF, Celery, and PostgreSQL on AWS. MSc Artificial Intelligence,
-            University of Essex.
+            Senior Python &amp; Django Backend Developer helping product teams ship faster with
+            scalable APIs, resilient background processing, and production-ready cloud platforms.
+          </p>
+          <p class="hero-proof">
+            <strong>3+ years</strong> in production backend engineering, led a team of 3, built systems
+            serving thousands of users, and delivered measurable results including
+            <strong>30% throughput improvement</strong>, <strong>25% lower latency</strong>, and
+            <strong>15% revenue uplift</strong>.
           </p>
           <div class="hero-badges">
             <span class="badge cyan">Django</span>
@@ -954,6 +1115,13 @@
             <a class="btn-primary" href="#contact">Get In Touch</a>
             <a class="btn-ghost" href="#experience">View Experience</a>
             <a class="btn-cv" href="Sherry_Wilson_CV.pdf" download="Sherry_Wilson_CV.pdf">⬇ Download CV</a>
+          </div>
+          <div class="worked-with">
+            <div class="worked-with-label">Worked with</div>
+            <span>ITC</span>
+            <span>Nippon Paints</span>
+            <span>Greencell Mobility</span>
+            <span>Fabelle</span>
           </div>
         </div>
 
@@ -998,6 +1166,38 @@
 
   <div class="divider"></div>
 
+  <!-- ─── Core Competencies ─────────────────────────────────────────────── -->
+  <section id="competencies">
+    <div class="container">
+      <div class="section-label">Core Competencies</div>
+      <h2 class="section-title">What Recruiters Should Know in 30 Seconds</h2>
+      <div class="competencies-grid">
+        <div class="competency-card reveal d1">
+          <div class="competency-title">Backend &amp; APIs</div>
+          <p class="competency-copy">Django, DRF, GraphQL and FastAPI for production APIs, async workflows, and maintainable service design.</p>
+        </div>
+        <div class="competency-card reveal d2">
+          <div class="competency-title">Cloud &amp; DevOps</div>
+          <p class="competency-copy">AWS EC2, Docker, Nginx and load-balanced deployments focused on reliability, scalability, and clean release workflows.</p>
+        </div>
+        <div class="competency-card reveal d3">
+          <div class="competency-title">Data &amp; Storage</div>
+          <p class="competency-copy">PostgreSQL, Redis, SQL optimisation, and streaming-friendly architecture for high-throughput backend systems.</p>
+        </div>
+        <div class="competency-card reveal d4">
+          <div class="competency-title">AI &amp; Automation</div>
+          <p class="competency-copy">LangChain, RAG, Gemini and background processing for document intelligence, automation, and applied AI delivery.</p>
+        </div>
+        <div class="competency-card reveal d5">
+          <div class="competency-title">Leadership</div>
+          <p class="competency-copy">Led a 3-person backend team, mentored junior developers, and shipped client-facing features with measurable business impact.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
   <!-- ─── About ────────────────────────────────────────────────────────── -->
   <section id="about">
     <div class="container">
@@ -1006,24 +1206,24 @@
       <div class="about-grid">
         <div class="about-text reveal">
           <p>
-            Senior Python developer with 3+ years building production backends and an
-            MSc in Artificial Intelligence from the University of Essex. My core expertise
-            is the Django ecosystem — Django, DRF, Celery, PostgreSQL, Redis, Flower, and Docker —
-            delivering high-availability APIs and background task systems on AWS.
+            Senior Python backend developer with 3+ years building production systems and an
+            MSc in Artificial Intelligence from the University of Essex. My strongest work sits
+            in the Django ecosystem — Django, DRF, Celery, PostgreSQL, Redis, Flower, and Docker —
+            delivering reliable APIs, asynchronous workflows, and cloud deployments that teams can scale.
           </p>
           <p>
             At Deepsense Digital Solutions I led a team of three developers, designed
             scalable backend architectures, and built REST and GraphQL APIs serving thousands
-            of users for clients including ITC, Nippon Paints, and Greencell Mobility.
-            I implemented Nginx reverse-proxy setups, load-balanced deployments, and HLS
-            video streaming via FFmpeg for eLearning platforms.
+            of users for clients including ITC, Nippon Paints, and Greencell Mobility. I delivered
+            a 30% throughput improvement, reduced latency by 25%, and supported a 15% revenue uplift
+            through backend performance and platform reliability work.
           </p>
           <p>
             I also work with FastAPI and have applied LangChain and RAG in projects,
             including a
             <strong style="color:var(--accent1);">Document Assistant API</strong>
-            (FastAPI + LangChain + ChromaDB + Gemini).
-            Open to Django Backend, Python Backend, and DRF roles across the UK.
+            (FastAPI + LangChain + ChromaDB + Gemini). I am currently targeting Django Backend,
+            Python Backend, DRF, and platform engineering roles across the UK.
           </p>
         </div>
         <div class="about-stats reveal d1">
@@ -1054,11 +1254,11 @@
   <section id="skills">
     <div class="container">
       <div class="section-label">Technical Skills</div>
-      <h2 class="section-title">The Stack Behind the Work</h2>
+      <h2 class="section-title">The Stack Behind the Outcomes</h2>
       <div class="skills-grid">
 
         <div class="skill-group reveal d1">
-          <div class="skill-group-title">Django Ecosystem (Primary)</div>
+          <div class="skill-group-title">Backend &amp; API Delivery</div>
           <div class="skill-tags">
             <span class="skill-tag hi">Django</span>
             <span class="skill-tag hi">Django REST Framework</span>
@@ -1071,7 +1271,7 @@
         </div>
 
         <div class="skill-group reveal d2">
-          <div class="skill-group-title">Infrastructure & Deployment</div>
+          <div class="skill-group-title">Cloud &amp; DevOps</div>
           <div class="skill-tags">
             <span class="skill-tag hi">AWS EC2</span>
             <span class="skill-tag hi">Docker</span>
@@ -1084,7 +1284,7 @@
         </div>
 
         <div class="skill-group reveal d3">
-          <div class="skill-group-title">Databases</div>
+          <div class="skill-group-title">Data &amp; Storage</div>
           <div class="skill-tags">
             <span class="skill-tag hi">PostgreSQL</span>
             <span class="skill-tag hi">SQL Optimisation</span>
@@ -1093,7 +1293,7 @@
         </div>
 
         <div class="skill-group reveal d1">
-          <div class="skill-group-title">Additional Frameworks</div>
+          <div class="skill-group-title">Frameworks &amp; Services</div>
           <div class="skill-tags">
             <span class="skill-tag hi">FastAPI</span>
             <span class="skill-tag">Flask</span>
@@ -1101,7 +1301,7 @@
         </div>
 
         <div class="skill-group reveal d2">
-          <div class="skill-group-title">AI / ML (Project Experience)</div>
+          <div class="skill-group-title">AI &amp; Automation</div>
           <div class="skill-tags">
             <span class="skill-tag med">LangChain</span>
             <span class="skill-tag med">RAG Architecture</span>
@@ -1114,7 +1314,7 @@
         </div>
 
         <div class="skill-group reveal d3">
-          <div class="skill-group-title">Core Skills</div>
+          <div class="skill-group-title">Leadership &amp; Delivery</div>
           <div class="skill-tags">
             <span class="skill-tag">REST API Design</span>
             <span class="skill-tag">Background Processing</span>
@@ -1135,17 +1335,25 @@
     <div class="container">
       <div class="section-label">Projects</div>
       <h2 class="section-title">Built &amp; Shipped</h2>
+      <div class="section-actions">
+        <a class="section-link" href="Sherry_Wilson_CV.pdf" download="Sherry_Wilson_CV.pdf">⬇ Download CV</a>
+        <a class="section-link" href="https://www.linkedin.com/in/sherry-wilson-python-dev" target="_blank" rel="noopener">🔗 LinkedIn Profile</a>
+        <a class="section-link" href="mailto:sherrywilly521@gmail.com">✉️ Email for project walkthroughs</a>
+      </div>
       <div class="projects-grid">
 
         <div class="project-card reveal d1">
           <div class="project-icon">🤖</div>
           <div class="project-name">Document Assistant API</div>
           <div class="project-desc">
-            RAG-powered document Q&amp;A system that ingests PDFs and answers questions
-            with accurate citations. Uses chunking, vector embeddings, and streaming
-            responses via Gemini.
+            RAG-powered document Q&amp;A system for teams that need faster access to information
+            locked inside large document sets.
           </div>
-          <div class="project-highlight">FastAPI + LangChain + ChromaDB + Gemini</div>
+          <div class="project-split">
+            <div class="project-line"><strong>Problem:</strong> Manual document lookup is slow and difficult to scale across growing PDF knowledge bases.</div>
+            <div class="project-line"><strong>Solution:</strong> Built citation-aware retrieval with chunking, vector search, ChromaDB storage, and Gemini-powered streaming answers.</div>
+          </div>
+          <div class="project-highlight">Impact: Faster knowledge retrieval with grounded answers and traceable citations</div>
           <div class="project-tags">
             <span class="project-tag c">FastAPI</span>
             <span class="project-tag c">LangChain</span>
@@ -1154,17 +1362,24 @@
             <span class="project-tag g">Gemini LLM</span>
             <span class="project-tag">Python</span>
           </div>
+          <div class="project-links">
+            <a class="project-link" href="Sherry_Wilson_CV.pdf" download="Sherry_Wilson_CV.pdf">Proof in CV</a>
+            <a class="project-link" href="mailto:sherrywilly521@gmail.com">Request walkthrough</a>
+          </div>
         </div>
 
         <div class="project-card reveal d2">
           <div class="project-icon">🎥</div>
           <div class="project-name">HLS Video Streaming Platform</div>
           <div class="project-desc">
-            eLearning platform backend with adaptive HLS video streaming. Videos are
-            transcoded via FFmpeg into multiple quality tiers and served through
-            CDN-backed AWS S3 with DRM-ready token authentication.
+            eLearning backend built for smoother video delivery, better playback reliability,
+            and cloud-native scaling.
           </div>
-          <div class="project-highlight">30% faster media delivery at scale</div>
+          <div class="project-split">
+            <div class="project-line"><strong>Problem:</strong> Large learning videos needed adaptive streaming and dependable delivery across multiple devices and bandwidth conditions.</div>
+            <div class="project-line"><strong>Solution:</strong> Built HLS transcoding pipelines with FFmpeg, AWS S3 delivery, token-based access control, and Nginx-backed serving.</div>
+          </div>
+          <div class="project-highlight">Impact: 30% faster media delivery at scale</div>
           <div class="project-tags">
             <span class="project-tag c">Django</span>
             <span class="project-tag c">Celery</span>
@@ -1173,17 +1388,24 @@
             <span class="project-tag g">AWS S3</span>
             <span class="project-tag">Nginx</span>
           </div>
+          <div class="project-links">
+            <a class="project-link" href="Sherry_Wilson_CV.pdf" download="Sherry_Wilson_CV.pdf">Proof in CV</a>
+            <a class="project-link" href="https://www.linkedin.com/in/sherry-wilson-python-dev" target="_blank" rel="noopener">LinkedIn profile</a>
+          </div>
         </div>
 
         <div class="project-card reveal d3">
           <div class="project-icon">🛒</div>
           <div class="project-name">Multi-Tenant E-Commerce Backend</div>
           <div class="project-desc">
-            High-availability REST + GraphQL backend for a multi-client retail
-            platform. Features async order processing, real-time inventory
-            updates via Redis pub/sub, and Kafka-driven microservices.
+            High-availability retail backend for multi-client operations, asynchronous order flows,
+            and real-time stock visibility.
           </div>
-          <div class="project-highlight">Serving thousands of concurrent users</div>
+          <div class="project-split">
+            <div class="project-line"><strong>Problem:</strong> Retail platforms needed multi-tenant architecture, reliable inventory sync, and backend performance under concurrent demand.</div>
+            <div class="project-line"><strong>Solution:</strong> Delivered REST and GraphQL APIs with Celery, Redis pub/sub, Kafka-driven services, and PostgreSQL-backed transaction flows.</div>
+          </div>
+          <div class="project-highlight">Impact: Served thousands of users while reducing latency by 25%</div>
           <div class="project-tags">
             <span class="project-tag c">Django DRF</span>
             <span class="project-tag c">GraphQL</span>
@@ -1192,23 +1414,34 @@
             <span class="project-tag g">PostgreSQL</span>
             <span class="project-tag g">Docker</span>
           </div>
+          <div class="project-links">
+            <a class="project-link" href="Sherry_Wilson_CV.pdf" download="Sherry_Wilson_CV.pdf">Proof in CV</a>
+            <a class="project-link" href="mailto:sherrywilly521@gmail.com">Discuss architecture</a>
+          </div>
         </div>
 
         <div class="project-card reveal d1">
           <div class="project-icon">📊</div>
           <div class="project-name">ML Data Pipeline &amp; Dashboard</div>
           <div class="project-desc">
-            End-to-end data pipeline for AI model training — automated ingestion,
-            cleaning, feature engineering with Pandas, and interactive visualisation
-            dashboards built with Matplotlib for stakeholder reporting.
+            End-to-end data preparation and reporting workflow to improve model-readiness
+            and stakeholder visibility.
           </div>
-          <div class="project-highlight">Improved model data quality significantly</div>
+          <div class="project-split">
+            <div class="project-line"><strong>Problem:</strong> AI model datasets required repeatable cleaning, transformation, and reporting before they could be used confidently.</div>
+            <div class="project-line"><strong>Solution:</strong> Automated ingestion, feature engineering, and reporting with Pandas, Matplotlib, and Python-based pipeline steps.</div>
+          </div>
+          <div class="project-highlight">Impact: Improved model data quality and stakeholder reporting confidence</div>
           <div class="project-tags">
             <span class="project-tag c">Python</span>
             <span class="project-tag c">Pandas</span>
             <span class="project-tag v">Matplotlib</span>
             <span class="project-tag g">ML Pipelines</span>
             <span class="project-tag">FastAPI</span>
+          </div>
+          <div class="project-links">
+            <a class="project-link" href="Sherry_Wilson_CV.pdf" download="Sherry_Wilson_CV.pdf">Proof in CV</a>
+            <a class="project-link" href="https://www.linkedin.com/in/sherry-wilson-python-dev" target="_blank" rel="noopener">LinkedIn profile</a>
           </div>
         </div>
 
@@ -1223,6 +1456,10 @@
     <div class="container">
       <div class="section-label">Experience</div>
       <h2 class="section-title">Career Journey</h2>
+      <p class="experience-note">
+        Core backend and platform engineering work is prioritised first below, followed by concise
+        recent UK experience during my transition into the local market.
+      </p>
 
       <div class="timeline">
 
@@ -1232,7 +1469,7 @@
           <div class="timeline-content reveal">
             <div class="job-header">
               <div class="job-title">Senior Python Backend Developer</div>
-              <span class="job-period">Aug 2021 — Jul 2024 · 3 yrs</span>
+              <span class="job-period">Aug 2021 — Jul 2024 · 3 years</span>
             </div>
             <div class="job-company">Deepsense Digital Solutions — Chennai, India</div>
             <ul class="job-bullets">
@@ -1256,7 +1493,7 @@
           <div class="timeline-content reveal d1">
             <div class="job-header">
               <div class="job-title">AI Intern</div>
-              <span class="job-period">Jul 2025 — Aug 2025 · 2 mos</span>
+              <span class="job-period">Jul 2025 — Aug 2025 · 2 months</span>
             </div>
             <div class="job-company">Victoria Solutions — London Area, UK</div>
             <ul class="job-bullets">
@@ -1273,7 +1510,7 @@
           <div class="timeline-content reveal d2">
             <div class="job-header">
               <div class="job-title">Python LLM Developer</div>
-              <span class="job-period">Sep 2025 — Oct 2025 · 2 mos</span>
+              <span class="job-period">Sep 2025 — Oct 2025 · 2 months</span>
             </div>
             <div class="job-company">AquSag Technologies — India</div>
             <ul class="job-bullets">
@@ -1290,8 +1527,8 @@
           <div class="timeline-dot"></div>
           <div class="timeline-content reveal d1">
             <div class="job-header">
-              <div class="job-title">Python Developer</div>
-              <span class="job-period">Jun 2020 — Jul 2021 · 1 yr 2 mos</span>
+              <div class="job-title">Freelance Python Backend Developer</div>
+              <span class="job-period">Jun 2020 — Jul 2021 · 1 year 2 months</span>
             </div>
             <div class="job-company">Self-employed — Kerala, India</div>
             <ul class="job-bullets">
@@ -1300,14 +1537,13 @@
               <li>Containerized and deployed scalable services using Docker across multi-environment setups.</li>
               <li>Integrated ML models into production environments with secure REST APIs.</li>
             </ul>
-            </ul>
           </div>
         </div>
 
         <!-- Welshwood Manor -->
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="timeline-content reveal d2">
+          <div class="timeline-content reveal d2 secondary-role">
             <div class="job-header">
               <div class="job-title">Team Leader</div>
               <span class="job-period">Jan 2026 — Present</span>
@@ -1322,10 +1558,10 @@
         <!-- Care Circle -->
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="timeline-content reveal d3">
+          <div class="timeline-content reveal d3 secondary-role">
             <div class="job-header">
               <div class="job-title">Senior Healthcare Assistant → Care Assistant</div>
-              <span class="job-period">Jul 2024 — Jan 2026 · 1 yr 7 mos</span>
+              <span class="job-period">Jul 2024 — Jan 2026 · 1 year 7 months</span>
             </div>
             <div class="job-company">Care Circle — Colchester, UK</div>
             <ul class="job-bullets">
@@ -1402,7 +1638,7 @@
   <section id="contact">
     <div class="container">
       <div class="section-label">Contact</div>
-      <h2 class="section-title">Let's Build Something Intelligent</h2>
+      <h2 class="section-title">Ready to Hire a Backend Engineer Who Delivers?</h2>
 
       <div class="availability-banner">
         <span class="dot"></span>
@@ -1410,8 +1646,8 @@
       </div>
 
       <p class="contact-intro">
-        Open to full-time opportunities in the UK. No sponsorship required —
-        Graduate Route Visa valid until 2027.
+        Open to full-time UK opportunities in backend, platform, and API engineering.
+        No sponsorship required — Graduate Route visa valid until 2027.
       </p>
 
       <div class="contact-links">
@@ -1429,7 +1665,11 @@
         </a>
       </div>
 
-      <a class="btn-primary" href="mailto:sherrywilly521@gmail.com">Start a Conversation →</a>
+      <div class="contact-cta-row">
+        <a class="btn-primary" href="mailto:sherrywilly521@gmail.com">Email Me Directly →</a>
+        <a class="btn-ghost" href="tel:+447778214285">Call Me</a>
+        <a class="btn-cv" href="Sherry_Wilson_CV.pdf" download="Sherry_Wilson_CV.pdf">⬇ Download CV</a>
+      </div>
     </div>
   </section>
 
